@@ -2,9 +2,7 @@ package com.crud;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.*;
 
@@ -33,11 +31,19 @@ public class Main {
         SpringApplication.run(Main.class,args);
     }
 
-    @RequestMapping(path="api/v1/customer", method= RequestMethod.GET)
+    @RequestMapping(path="api/v1/customers", method= RequestMethod.GET)
     public List<Customer> getCustomers(){
         return customers;
     }
 
+    @GetMapping("api/v1/customers/{customerId}")
+    public Customer getCustomer(@PathVariable("customerId") Integer customerId){
+        Customer customer = customers.stream()
+                .filter(c -> c.id.equals(customerId))
+                .findFirst()
+                .orElseThrow(() -> new IllegalArgumentException("customer id does not exist"));
+        return customer;
+    }
     static class Customer{
         private Integer id;
         private String name;
