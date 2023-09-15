@@ -2,6 +2,8 @@ package com.crud;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.*;
@@ -10,6 +12,7 @@ import java.util.*;
 @RestController
 public class Main {
     // db
+
     private static List<Customer> customers;
 
     static {
@@ -26,8 +29,13 @@ public class Main {
         customers.add(jamila);
     }
     public static void main(String[] args) {
-        System.out.print(customers);
+
         SpringApplication.run(Main.class,args);
+    }
+
+    @RequestMapping(path="api/v1/customer", method= RequestMethod.GET)
+    public List<Customer> getCustomers(){
+        return customers;
     }
 
     static class Customer{
