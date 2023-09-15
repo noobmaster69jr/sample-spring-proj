@@ -9,7 +9,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
-@SpringBootApplication
+@SpringBootApplication // combination of configuration, ComponentScan, EnableAutoConfiguration
+
 @RestController
 public class Main {
 
