@@ -1,7 +1,9 @@
 package com.crud.customer;
 
-import java.util.List;
+import org.springframework.stereotype.Service;
 
+import java.util.List;
+@Service
 public class CustomerService {
     private final CustomerDAO customerDAO;
 
@@ -15,6 +17,6 @@ public class CustomerService {
 
     public Customer getCustomer(Integer id){
         return customerDAO.selectCustomerById(id)
-                .orElseThrow(() -> new IllegalArgumentException("customer id does not exist"));
+                .orElseThrow(() -> new ResourceNotFound("customer id does not exist"));
     }
 }
